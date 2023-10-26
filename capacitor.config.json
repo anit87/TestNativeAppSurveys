@@ -1,0 +1,8 @@
+{
+  "appId": "survey.app",
+  "appName": "surveys-ui",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}
