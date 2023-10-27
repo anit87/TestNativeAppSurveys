@@ -16,6 +16,8 @@ import { objectToFormData, appendArrayToFormData } from '../../../utils/function
 
 import CameraCapture from '../../CameraCapture';
 import SmallImageCard from '../../SmallImageCard';
+import { usePhotoGallery } from '../../../utils/usePhotoGallery'
+
 const apiUrl = import.meta.env.VITE_API_URL + '/forms'
 
 const FieldArrayAddIcon = ({ label, arrayHelpers, object }) => {
@@ -69,6 +71,7 @@ const initialValues = {
 }
 
 const SurveyForm = ({ activeStep, setActiveStep }) => {
+    const { photos, takePhoto } = usePhotoGallery();
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -318,13 +321,21 @@ const SurveyForm = ({ activeStep, setActiveStep }) => {
                                             placeholder="Please Provide Your Voter ID Number"
                                         />
                                         <div className='d-flex'>
+                                            <Button className='mx-2' type="button" onClick={() => takePhoto()}>Take Picture</Button>
+                                            <FileUpload name="voterIdImage"
+                                                onInputChange={(event, newIndex) => handleInputChange(1, event, newIndex)}
+                                                selectedFile={selectedFile}
+                                            />
+                                        </div>
+                                        {/* <div className='d-flex'>
                                             <Button className='mx-2' type="button" onClick={() => setisCapturing(true)}>Capture</Button>
                                             <FileUpload name="voterIdImage"
                                                 onInputChange={(event, newIndex) => handleInputChange(1, event, newIndex)}
                                                 selectedFile={selectedFile}
                                             />
                                         </div>
-                                        {capturedFile && <div className='my-2'> <SmallImageCard imageUrl={capturedFile} /></div>}
+                                        {capturedFile && <div className='my-2'> <SmallImageCard imageUrl={capturedFile} /></div>} */}
+                                        {<div className='my-2'> <SmallImageCard imageUrl={photos[0].webviewPath} /></div>}
                                         {selectedFile && <div className='my-2'><h6>{selectedFile.name}</h6> </div>}
                                         {isCapturing && <CameraCapture setcapturedFile={(img) => (setcapturedFile(img), setisCapturing(false), setSelectedFile(""))} />}
 

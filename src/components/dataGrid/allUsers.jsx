@@ -22,7 +22,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../loader';
 import NoData from '../NoData';
 import { userToUpdate } from '../../features/auth/authSlice';
-import { fetchUsersData } from '../../features/auth/usersSlice';
 import TableHeader from './TableHeader';
 
 const tableCells = [{ label: '' }, { label: 'S.No' }, { label: 'Name' }, { label: 'Phone' }, { label: 'Email' }, { label: 'Role' }, { label: '' }]
