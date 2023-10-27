@@ -136,9 +136,7 @@ export default function CollapsibleTable() {
   };
   const getUsers = async () => {
     setIsLoading(true)
-    console.time('myCode');
     const response = await axios.get(apiUrl, { headers })
-    console.timeEnd('myCode');
     setUsers(response.data)
     setIsLoading(false)
   }

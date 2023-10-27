@@ -7,19 +7,27 @@ function CameraCapture(props) {
     const [error, setError] = useState(null);
     const [videoConstraint, setvideoConstraint] = useState(null);
 
-    useEffect(() => {
-        const checkCameraAvailability = async () => {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                if (webcamRef.current) {
-                    webcamRef.current.srcObject = stream;
-                }
-            } catch (err) {
-                setError('Camera not found or permission denied.');
+    const checkCameraAvailability = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            if (webcamRef.current) {
+                webcamRef.current.srcObject = stream;
             }
-        };
+        } catch (err) {
+            setError('Camera not found or permission denied.');
+        }
+    };
+
+    useEffect(() => {
         checkCameraAvailability();
     }, []);
+    
+    useEffect(() => {
+        if (!error) {
+            initCamera();       // Call initCamera when the component mounts
+        }
+    }, [])
+
 
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
@@ -49,18 +57,17 @@ function CameraCapture(props) {
     };
 
     const initCamera = async () => {
-        const videoConstraints = await getCameraDevices();
-        if (videoConstraints) {
-            webcamRef.current.getUserMedia({ video: videoConstraints });
-        } else {
-            webcamRef.current.getUserMedia({ video: true });
+        try {
+            const videoConstraints = await getCameraDevices();
+            if (videoConstraints) {
+                webcamRef.current.getUserMedia({ video: videoConstraints });
+            } else {
+                webcamRef.current.getUserMedia({ video: true });
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
-
-    // Call initCamera when the component mounts
-    React.useEffect(() => {
-        initCamera();
-    }, []);
 
     if (error) {
         return (
@@ -70,7 +77,6 @@ function CameraCapture(props) {
     // const videoConstraints = {
     //     facingMode: { exact: "environment" }
     // };
-    console.log("-----------videoConstraints", videoConstraint);
 
     return (
         <div>

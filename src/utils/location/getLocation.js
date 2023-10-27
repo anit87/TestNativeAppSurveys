@@ -14,8 +14,8 @@ export const getLocation = () => {
                     if (response.data.status === 'OK') {
                         const results = response.data.results;
                         const location = results[0].formatted_address;
-                        console.log(`Location: ${location}`);
-                        resolve({location, latitude, longitude});
+                        // console.log(`Location: ${location}`);
+                        resolve({ location, latitude, longitude });
                     } else {
                         const errorMessage = `Geocoding API request failed: ${response.data.status}`;
                         console.error(errorMessage);

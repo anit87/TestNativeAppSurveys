@@ -126,13 +126,13 @@ const SurveyForm = ({ activeStep, setActiveStep }) => {
                 <Box sx={{ height: '100%', mt: 1 }} >
                     <Formik
                         initialValues={initialValues}
-                        validationSchema={
-                            activeStep == 0 ? surveyFormSchemaStep0 :
-                                activeStep == 1 ? surveyFormSchemaStep1 :
-                                    activeStep == 2 ? surveyFormSchemaStep2 :
-                                        activeStep == 3 ? surveyFormSchemaStep3 :
-                                            activeStep == 4 ? surveyFormSchema : surveyFormSchema
-                        }
+                        // validationSchema={
+                        //     activeStep == 0 ? surveyFormSchemaStep0 :
+                        //         activeStep == 1 ? surveyFormSchemaStep1 :
+                        //             activeStep == 2 ? surveyFormSchemaStep2 :
+                        //                 activeStep == 3 ? surveyFormSchemaStep3 :
+                        //                     activeStep == 4 ? surveyFormSchema : surveyFormSchema
+                        // }
                         submitting={true}
                         validateOnBlur={false}
                         validateOnChange={false}
@@ -175,7 +175,7 @@ const SurveyForm = ({ activeStep, setActiveStep }) => {
                                             title="Please Enter Your Name"
                                             name="respondentName"
                                             type="text"
-                                            placeholder="Please Provide Your Full Name"
+                                            placeholder="Please Provide Your Name"
                                         />
                                     </Grid>
 

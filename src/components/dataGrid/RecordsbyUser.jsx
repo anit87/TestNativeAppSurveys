@@ -39,7 +39,7 @@ export default function RecordsbyUser() {
   const getUsers = async () => {
     setIsLoading(true)
     const response = await axios.post(apiUrl, { id }, { headers })
-    console.log(response.data);
+    // console.log(response.data);
     setFormsDetail(response.data)
     setIsLoading(false)
   }
